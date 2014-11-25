@@ -7,7 +7,7 @@ function [ciu Q] = consensus_und_helper(ConnMatrix,type)
 validateattributes(ConnMatrix,{'numeric'},{'square','nonempty','nonzero'});
 validateattributes(type,{'struct'},{'nonempty'});
 
-buffsz = 1000; % default
+buffsz = 150; % default
 
 if isfield(type,'buffsz') && isnumeric(type.buffsz), buffsz=type.buffsz; end
 
@@ -19,8 +19,13 @@ if ~isfield(type,'reps'), error('myApp:argChk', 'Number of times that the cluste
 elseif ~isnumeric(type.reps) || type.reps<1, error('myApp:argChk', 'Number of times that the clustering algorithm is reapplied (type.reps) must be a number greater that 0.');
 end
 
-Ci = modularity_louvain_und_sign(ConnMatrix);
+C1 = modularity_louvain_und_sign(ConnMatrix);
+Ci=C1'
+for i=1:reps-1
+C = modularity_louvain_und_sign(ConnMatrix);
+Ci=horzcat(Ci,C');
+end
 D = agreement(Ci,buffsz);
-[ciu Q] = consensus_und(D,type.tau,type.reps);
+[ciu,Q] = consensus_und(D,type.tau,type.reps);
 
 end
