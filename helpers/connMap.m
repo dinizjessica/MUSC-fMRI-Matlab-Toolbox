@@ -61,8 +61,6 @@ end
 
 M = zeros(size(X,2));
 
-isPartial = false;
-
 if isfield(opts,'type') && ~strcmpi( opts.type,'none')
 
     for y = 1:size(X,2)
@@ -73,31 +71,15 @@ else
 end;
 
 if isfield(opts,'corrType'), 
-    
-    if strcmpi( opts.corrType,'partial'),
-        
-        isPartial = true;
+    switch opts.corrType
+        case 'partial'
+            M=partialcorr_shrinkage(Xf);           % supports shrinkage
+        case {'kendall','pearson','spearman'}
+            M=corr(Xf, 'type', opts.corrType);
         
     end;
-    
 end;
 
-for i = 1:length(M)
-    
-   for j = (i+1):length(M)
-       
-           if isPartial,
-       
-                Z=Xf;
-                Z(:,[i j])=[];
-                opts.partialZ=Z';
-           
-           end;
-                 
-           M(i,j) = corrAux(Xf(:,i),Xf(:,j),opts);
-           M(j,i)=M(i,j);
-           
-   end
 end
 
 %imshow(M); colormap(jet);
