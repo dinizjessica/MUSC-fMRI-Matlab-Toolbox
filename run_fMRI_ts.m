@@ -3,8 +3,6 @@ function M = run_fMRI_ts(X, opts, varargin)
 
 %   M = run_fMRI_ts(X, opts, varargin);
 %   
-%
-%MARCO WAS HERE
 % 
 %   This function generates a spreadsheet containing all results from the
 %   selected measures for each node specified by the timeseries X.
@@ -85,7 +83,7 @@ function M = run_fMRI_ts(X, opts, varargin)
 %
 %
 %            varargin,      Matlab structure responsable for determining
-%                           which measure must be calculateÂ and their
+%                           which measure must be calculate and their
 %                           respective parameters.
 %                               name            selected measure. Required
 %                                                   'betweenness'
