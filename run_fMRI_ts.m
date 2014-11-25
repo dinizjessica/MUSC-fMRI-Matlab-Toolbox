@@ -514,6 +514,7 @@ if iscell(X)
     for i=1:length(varargin)
         
         for k=1:length(X)
+            sprintf('Subject number %d',k)
             aux{k}=run_fMRI_ts_data_cell(X{k}, opts, varargin{i});
         end
         M{i} = aux;
