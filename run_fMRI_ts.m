@@ -83,7 +83,7 @@ function M = run_fMRI_ts(X, opts, varargin)
 %
 %
 %            varargin,      Matlab structure responsable for determining
-%                           which measure must be calculate and their
+%                           which measure must be calculate?and their
 %                           respective parameters.
 %                               name            selected measure. Required
 %                                                   'betweenness'
@@ -508,6 +508,7 @@ function M = run_fMRI_ts(X, opts, varargin)
 if nargin<3, error('myApp:argChk', 'All 3 arguments are required.'); end
 
 addpath(genpath('2014_04_05 BCT'));
+addpath(genpath('helpers'));
 
 if iscell(X)
     for i=1:length(varargin)
