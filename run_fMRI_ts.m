@@ -518,7 +518,7 @@ if iscell(X)
         end
         M{i} = aux;
         
-        filename  = strcat(lower(varargin{i}.name), '_spreadsheet', datestr(clock,'_mm-dd-yyyy_HH-MM-SS'), '.csv');
+        filename  = strcat(lower(varargin{i}.name), '_',opts.corrType, datestr(clock,'_mm-dd-yyyy_HH-MM-SS'), '.csv');
         filename_msg = ['The output is going to be in a file named ',filename];
         disp(filename_msg);
         
